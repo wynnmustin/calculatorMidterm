@@ -16,7 +16,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     let mySpeechSynth = AVSpeechSynthesizer()
     var myUtterance = AVSpeechUtterance(string: "Hi View Did Load")
     
-    var myRate: Float = 0.50
+    var myRate: Float = 0.20
     var myPitch: Float = 1.15
     var myVolume: Float = 0.92
     
@@ -41,6 +41,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     
     @IBOutlet weak var label: UILabel!
+    
+    //MARK day/night mode switch
 
     @IBAction func colorSwitch(sender: UISwitch) {
         
@@ -68,7 +70,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        mySpeechSynth.speakUtterance(myUtterance)
+       // mySpeechSynth.speakUtterance(myUtterance)
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,7 +111,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
     }
   
-    
+    //MARK Number Presses
     
     @IBAction func tappedNumber(sender: UIButton) {
         
@@ -152,27 +154,28 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         speakThisString(valueString)
     }
     
+    //MARK User Adds
     
     @IBAction func tappedPlus(sender: AnyObject) {
         self.setMode1(1)
 
     }
     
-    
+    //MARK User Subtracts
     @IBAction func tappedMinus(sender: AnyObject) {
         self.setMode1(-1)
 
         
     }
     
-    
+    //MARK User Multiplies
     @IBAction func tappedX(sender: AnyObject) {
         self.setMode1(2)
 
     }
     
     
-   
+   //MARK User Calculates
     @IBAction func tappedEquals(sender: AnyObject) {
         if (mode == 0)
         {
@@ -203,6 +206,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         totalEquals = true
     }
     
+    //MARK User Clears
     
     @IBAction func tappedClear(sender: AnyObject) {
         total = 0
@@ -210,6 +214,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         valueString = ""
         label.text = "0"
     }
+    
+    //MARK Calculation Function
     
     func setMode1(m:Int){
         
@@ -222,6 +228,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         total = valueString.toInt()!
     }
 
+    
+    //MARK Speech Engine
+    
+    
     func speakThisString(passedString: String){
         
         mySpeechSynth.stopSpeakingAtBoundary(AVSpeechBoundary.Immediate)
